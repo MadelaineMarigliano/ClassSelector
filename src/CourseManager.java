@@ -9,8 +9,8 @@ public class CourseManager {
     // Gets the number of different time options there are for course c
     public int numberOfTimes(Course c){
         int n = 0;
-        for (ArrayList<ArrayList<Integer>> value : c.getTimes().values()) {
-            n = n + value.size();
+        for (String day : c.getTimes().keySet()){
+            n = n + c.getTimes().get(day).size();
         }
         return n;
     }
@@ -18,8 +18,8 @@ public class CourseManager {
     //Removes times at a certain time
     public void breakPreference(Course c, Integer time){
         for (String day : c.getTimes().keySet()){
-            for (ArrayList<Integer> t : c.getTimes().get(day)) {
-                if (t.get(0) == time){
+            for (TimeSlot t : c.getTimes().get(day)) {
+                if (t.getStart() == time){
                     c.removeTime(day, t);
                 }
             }
@@ -29,8 +29,8 @@ public class CourseManager {
     //Removes times that start before a certain time
     public void startPreference(Course c, Integer time){
         for (String day : c.getTimes().keySet()){
-            for (ArrayList<Integer> t : c.getTimes().get(day)) {
-                if (t.get(0) < time){
+            for (TimeSlot t : c.getTimes().get(day)) {
+                if (t.getStart() < time){
                     c.removeTime(day, t);
                 }
             }
@@ -40,8 +40,8 @@ public class CourseManager {
     //Removes times that start after a certain time
     public void endPreference(Course c, Integer time){
         for (String day : c.getTimes().keySet()){
-            for (ArrayList<Integer> t : c.getTimes().get(day)) {
-                if (t.get(0) > time){
+            for (TimeSlot t : c.getTimes().get(day)) {
+                if (t.getStart() > time){
                     c.removeTime(day, t);
                 }
             }

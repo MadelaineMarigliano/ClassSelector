@@ -35,7 +35,7 @@ public class ScheduleManager {
         }else {
             Course c = courses.get(0);
             for (String day : c.getTimes().keySet()){
-                for (ArrayList<Integer> t : c.getTimes().get(day)) {
+                for (TimeSlot t : c.getTimes().get(day)) {
 
                     }
             }

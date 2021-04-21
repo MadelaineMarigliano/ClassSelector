@@ -19,4 +19,31 @@ public class TimeSlot {
 
     }
 
+    public String getDay() {
+        return day;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public Integer getEnd() {
+        return end;
+    }
+
+    public Integer getStart() {
+        return start;
+    }
+
+    public String getProfessor() {
+        return professor;
+    }
 }

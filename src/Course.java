@@ -70,7 +70,7 @@ public class Course {
         return times;
     }
 
-    public void removeTime(String day, ArrayList<Integer> time){
+    public void removeTime(String day, TimeSlot time){
         times.get(day).remove(time);
     }
 
