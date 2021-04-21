@@ -10,7 +10,7 @@ public class Course {
     private Integer end;
     private HashMap<String, ArrayList<TimeSlot>> times;
 
-    public Course(String courseCode, boolean tutorial, String description, String name, HashMap<String, ArrayList<ArrayList<Integer>>> times) {
+    public Course(String courseCode, boolean tutorial, String description, String name, HashMap<String, ArrayList<TimeSlot>> times) {
         if (tutorial) {
             this.courseCode = courseCode + "TUT";
         } else {
@@ -18,7 +18,7 @@ public class Course {
         }
         this.description = description;
         this.name = name;
-        //this.times = times;
+        this.times = times;
 
     }
 
@@ -66,8 +66,8 @@ public class Course {
         return name;
     }
 
-    public HashMap<String, ArrayList<ArrayList<Integer>>> getTimes() {
-        //return times;
+    public HashMap<String, ArrayList<TimeSlot>> getTimes() {
+        return times;
     }
 
     public void removeTime(String day, ArrayList<Integer> time){
