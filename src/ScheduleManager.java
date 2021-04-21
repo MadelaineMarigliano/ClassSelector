@@ -23,6 +23,7 @@ public class ScheduleManager {
     }
 
     //These courses are the ones with preferences applied already
+    //NOT DONE
     private ArrayList<Schedule> createSchedules(ArrayList<Course> courses){
 
         ArrayList<Schedule> schedules = new ArrayList<>();
