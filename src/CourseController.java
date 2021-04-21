@@ -3,11 +3,20 @@ import java.util.Scanner;
 public class CourseController {
     private CourseView view;
 
-    private void Run() {
+    private AbstractController run() {
         Scanner scanner = new Scanner(System.in);
         view.displayMenu();
         int option;
         option = selectOption(scanner);
+        switch(option) {
+            case 1: //add course
+
+            case 2: //delete course
+
+            case 3: // modify course:
+
+            case 4: // back
+        }
     }
 
     private int selectOption(Scanner scanner) {
@@ -29,4 +38,4 @@ public class CourseController {
             } while(true);
         }
     }
-}
+
