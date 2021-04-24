@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-public class CourseController {
-    private CourseView view;
+public class ScheduleController {
+    private ScheduleView view;
 
     private AbstractController run() {
         Scanner scanner = new Scanner(System.in);
@@ -9,13 +9,11 @@ public class CourseController {
         int option;
         option = selectOption(scanner);
         switch(option) {
-            case 1: //add course
+            case 1: //Create schedule
 
-            case 2: //delete course
+            case 2: //View schedule
 
-            case 3: // modify course:
-
-            case 4: // back
+            case 3: // back
         }
         return null;
     }
@@ -32,11 +30,8 @@ public class CourseController {
                     return 2;
                 case "3":
                     return 3;
-                case "4":
-                    return 4;
             }
             view.optionError();
-            } while(true);
-        }
+        } while(true);
     }
-
+}
