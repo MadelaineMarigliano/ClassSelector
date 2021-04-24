@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ScheduleManager {
@@ -12,7 +13,13 @@ public class ScheduleManager {
     public void printToHTML(Schedule s){}
 
     //NOT DONE
-    public int compactnessScore(Schedule s){return 0;}
+    public int compactnessScore(Schedule s){
+        int score = 0;
+        HashMap<Course, ArrayList<Integer>> schedule = s.getCourses();
+
+
+        return score;
+    }
 
     //checks if there is a conflict
     //NOT DONE
