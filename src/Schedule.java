@@ -2,14 +2,39 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Schedule {
-    //course with a set day and time
-    //I don't know if we need this class... we won't up saving the schedule but rather updating the class objects
-    // to hold the chosen time at the end of finding the best schedule
-    //So we probably will get rid of this class but lets just wait
+    //Controller needs to check for conflicts
     private HashMap<Course, Option> chosenOptions;
+    private HashMap<String, ArrayList<TimeSlot>> schedule;
 
-    public HashMap<Course, Option> getChosenOptions() {return chosenOptions;
+    public Schedule(HashMap<Course, Option> chosenOptions){
+        this.chosenOptions = chosenOptions;
+
+        schedule = new HashMap<>();
+        schedule.put("Monday", new ArrayList<>());
+        schedule.put("Tuesday", new ArrayList<>());
+        schedule.put("Wednesday", new ArrayList<>());
+        schedule.put("Thursday", new ArrayList<>());
+        schedule.put("Friday", new ArrayList<>());
+
+        for (Option option : chosenOptions.values()){
+            for (TimeSlot time : option.getTimes()){
+                schedule.get(time.getDay()).add(time);
+            }
+        }
     }
 
-    //Controller needs to check for conflicts
+    public HashMap<Course, Option> getChosenOptions() {return chosenOptions;}
+
+    public HashMap<String, ArrayList<TimeSlot>> getSchedule() {
+        return schedule;
+    }
+
+    public void setChosenOptions(HashMap<Course, Option> chosenOptions) {
+        this.chosenOptions = chosenOptions;
+    }
+
+    public void setSchedule(HashMap<String, ArrayList<TimeSlot>> schedule) {
+        this.schedule = schedule;
+    }
+
 }

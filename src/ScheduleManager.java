@@ -11,19 +11,17 @@ public class ScheduleManager {
     //NOT DONE
     public void printToHTML(Schedule s){}
 
-    //NOT DONE
+
     public int compactnessScore(Schedule s){
         int score = 0;
-        HashMap<Course, Option> schedule = s.getChosenOptions();
-
-
+        for (String day : s.getSchedule().keySet()){
+            ArrayList<TimeSlot> times = s.getSchedule().get(day);
+            for (int i = 0; i < times.size() - 1; i++){
+                score = score + (times.get(i+1).getStart() - times.get(i).getEnd());
+            }
+        }
         return score;
     }
-
-    //checks if there is a conflict
-    //NOT DONE
-    private boolean courseConflict(Schedule s, Course c){return false;}
-
 
     //These courses are the ones with preferences applied already
     //We should probably use recursion here... sbatessss
