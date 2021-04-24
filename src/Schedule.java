@@ -3,17 +3,13 @@ import java.util.HashMap;
 
 public class Schedule {
     //course with a set day and time
-    private HashMap<Course, ArrayList<Integer>> courses;
+    //I don't know if we need this class... we won't up saving the schedule but rather updating the class objects
+    // to hold the chosen time at the end of finding the best schedule
+    //So we probably will get rid of this class but lets just wait
+    private HashMap<Course, Option> chosenOptions;
+
+    public HashMap<Course, Option> getChosenOptions() {return chosenOptions;
+    }
 
     //Controller needs to check for conflicts
-    public Schedule(ArrayList<Course> courses){
-        this.courses = new HashMap<>();
-        for (Course course : courses){
-            this.courses.put(course, new ArrayList<>());
-        }
-    }
-
-    public HashMap<Course, ArrayList<Integer>> getCourses() {
-        return courses;
-    }
 }
