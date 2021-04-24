@@ -50,6 +50,24 @@ public class CourseManager {
         }
     }
 
+    public Course getCourseByCode(String courseCode){
+        for (Course c : courses){
+            if (c.getCourseCode() == courseCode){
+                return c;
+            }
+            }
+        return null;
+        //raise an exception?
+    }
+
+    public void removeCourse(Course c){
+        courses.remove(c);
+    }
+
+    public void addCourse(Course c) {
+        courses.add(c);
+    }
+
 
 
 

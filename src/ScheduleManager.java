@@ -3,6 +3,7 @@ import java.util.HashMap;
 
 public class ScheduleManager {
     ArrayList<Schedule> scheduleArrayList;
+    private ScheduleManager manager;
 
     public ScheduleManager(){
         scheduleArrayList = new ArrayList<>();
