@@ -30,4 +30,19 @@ public class CourseView {
     public void tutorialPrompt() {
         System.out.println("Is this a tutorial? please enter 'yes' if it is: ");
     }
+
+    public void dayPrompt() {
+    }
+
+    public void locationPrompt() {
+    }
+
+    public void addTimeSlot() {
+    }
+
+    public void addOption() {
+    }
+
+    public void ProfPrompt() {
+    }
 }
