@@ -9,7 +9,7 @@ public class ScheduleManager {
         scheduleArrayList = new ArrayList<>();
     }
 
-    //NOT DONE
+    //TODO
     public void printToHTML(Schedule s){}
 
 
@@ -26,7 +26,7 @@ public class ScheduleManager {
 
     //These courses are the ones with preferences applied already
     //We should probably use recursion here... sbatessss
-    //NOT DONE
+    //TODO
     private ArrayList<Schedule> createSchedules(ArrayList<Course> courses){
         return null;
     }

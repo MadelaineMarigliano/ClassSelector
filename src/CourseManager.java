@@ -7,44 +7,52 @@ public class CourseManager {
     public CourseManager(){}
 
     //Removes times at a certain time
-    public void breakPreference(Course c, Integer time){
-       for (Option option : c.getOptions()){
-           for (TimeSlot timeSlot : option.getTimes()){
-               if (timeSlot.getStart() == time){
+    public void breakPreference(Integer time){
+        for (Course c : courses){
+            for (Option option : c.getOptions()){
+                for (TimeSlot timeSlot : option.getTimes()){
+                    if (timeSlot.getStart() == time){
                    c.removeOption(option);
-               }
-           }
-       }
+                    }
+                }
+            }
+        }
     }
 
     //Removes times that start before a certain time
-    public void startPreference(Course c, Integer time){
-        for (Option option : c.getOptions()){
-            for (TimeSlot timeSlot : option.getTimes()){
-                if (timeSlot.getStart() < time){
-                    c.removeOption(option);
+    public void startPreference(Integer time){
+        for (Course c : courses){
+            for (Option option : c.getOptions()){
+                for (TimeSlot timeSlot : option.getTimes()){
+                    if (timeSlot.getStart() < time){
+                        c.removeOption(option);
+                    }
                 }
             }
         }
     }
 
     //Removes times that start after a certain time
-    public void endPreference(Course c, Integer time){
-        for (Option option : c.getOptions()){
-            for (TimeSlot timeSlot : option.getTimes()){
-                if (timeSlot.getStart() > time){
-                    c.removeOption(option);
+    public void endPreference(Integer time) {
+        for (Course c : courses) {
+            for (Option option : c.getOptions()) {
+                for (TimeSlot timeSlot : option.getTimes()) {
+                    if (timeSlot.getStart() > time) {
+                        c.removeOption(option);
+                    }
                 }
             }
         }
     }
 
     //Removes times on a specific day
-    public void dayPreference(Course c, String day){
-        for (Option option : c.getOptions()){
-            for (TimeSlot timeSlot : option.getTimes()){
-                if (timeSlot.getDay() == day){
-                    c.removeOption(option);
+    public void dayPreference(String day) {
+        for (Course c : courses) {
+            for (Option option : c.getOptions()) {
+                for (TimeSlot timeSlot : option.getTimes()) {
+                    if (timeSlot.getDay() == day) {
+                        c.removeOption(option);
+                    }
                 }
             }
         }

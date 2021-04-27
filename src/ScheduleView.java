@@ -12,4 +12,15 @@ public class ScheduleView {
     public void optionError(){
         System.out.println("Please enter a number representing one of the options.");
     }
+
+    public void preferencesPrompt() {System.out.println("Please enter the number representing one of the preferences, " +
+            "or press 0 to stop applying preferences");
+        System.out.println("1. No classes before a certain time");
+        System.out.println("2. No classes at a certain time");
+        System.out.println("3. No classes after a certain time");
+        System.out.println("4. No classes on a specific day");
+    }
+
+    public void timePrompt(){System.out.println("Please enter the desired time in 24 hour format (e.g. 13)");}
+    public void dayPrompt(){System.out.println("Please enter the desired day in lowercase (e.g. monday)");}
 }
