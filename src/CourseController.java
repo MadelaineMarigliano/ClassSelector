@@ -42,7 +42,7 @@ public class CourseController {
             } while(true);
         }
 
-    //TODO
+    //NOT DONE
     private void modify(Scanner scanner) {
     }
 
@@ -76,7 +76,7 @@ public class CourseController {
         manager.addCourse(c);
     }
 
-    //TODO
+    //NOT DONE
     private ArrayList<Option> getOptions(String code, Scanner scanner){
         ArrayList options = new ArrayList<Option>();
         String answer = new String("Yes");
@@ -120,8 +120,7 @@ public class CourseController {
         if (name.equals("duration")){
 
         }
-        return null;
-    }
 
+    }
 }
 
