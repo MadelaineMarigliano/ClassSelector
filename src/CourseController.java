@@ -120,7 +120,7 @@ public class CourseController {
         if (name.equals("duration")){
 
         }
-
+        return null;
     }
 }
 
