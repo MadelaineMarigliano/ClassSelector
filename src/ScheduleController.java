@@ -10,9 +10,9 @@ public class ScheduleController {
         option = selectOption(scanner);
         switch(option) {
             case 1: //Create schedule
-
+                createSchedule(scanner);
             case 2: //View schedule
-
+                viewSchedule(scanner);
             case 3: // back
         }
         return null;
@@ -34,4 +34,38 @@ public class ScheduleController {
             view.optionError();
         } while(true);
     }
+
+
+    private void createSchedule(Scanner scanner){
+        view.preferencesPrompt();
+        String input = scanner.nextLine().trim();
+        while (input != "0"){
+            if (input == "1"){
+                view.timePrompt();
+                int time = scanner.nextInt();
+
+
+            }
+            if (input == "2") {
+                view.timePrompt();
+                int time = scanner.nextInt();
+
+            }
+            if (input == "3") {
+                view.timePrompt();
+                int time = scanner.nextInt();
+
+            }
+            if (input == "4") {
+                view.dayPrompt();
+                String day = scanner.nextLine().trim();
+
+            }
+            input = scanner.nextLine().trim();
+        }
+
+    }
+
+    //TODO
+    private void viewSchedule(Scanner scanner){}
 }
