@@ -5,6 +5,7 @@ public class Schedule {
     //Controller needs to check for conflicts
     private HashMap<Course, Option> chosenOptions;
     private HashMap<String, ArrayList<TimeSlot>> schedule;
+    private int compactnessScore;
 
     public Schedule(HashMap<Course, Option> chosenOptions){
         this.chosenOptions = chosenOptions;
@@ -19,6 +20,14 @@ public class Schedule {
         for (Option option : chosenOptions.values()){
             for (TimeSlot time : option.getTimes()){
                 schedule.get(time.getDay()).add(time);
+            }
+        }
+
+        compactnessScore = 0;
+        for (String day : schedule.keySet()){
+            ArrayList<TimeSlot> times = schedule.get(day);
+            for (int i = 0; i < times.size() - 1; i++){
+                compactnessScore = compactnessScore + (times.get(i+1).getStart() - times.get(i).getEnd());
             }
         }
     }
@@ -36,5 +45,7 @@ public class Schedule {
     public void setSchedule(HashMap<String, ArrayList<TimeSlot>> schedule) {
         this.schedule = schedule;
     }
+
+    public int getCompactnessScore() {return compactnessScore;}
 
 }

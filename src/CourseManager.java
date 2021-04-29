@@ -76,7 +76,7 @@ public class CourseManager {
         courses.add(c);
     }
 
-
-
-
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
 }

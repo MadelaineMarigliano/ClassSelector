@@ -40,7 +40,6 @@ public class ScheduleController extends AbstractController {
         } while(true);
     }
 
-
     private void createSchedule(Scanner scanner){
         view.preferencesPrompt();
         int input = scanner.nextInt();
@@ -68,6 +67,10 @@ public class ScheduleController extends AbstractController {
             input = scanner.nextInt();
         }
 
+        Schedule s = scheduleManager.bestSchedule(courseManager.getCourses());
+        for (Course c : courseManager.getCourses()){
+            c.setChosenOption(s.getChosenOptions().get(c));
+        }
     }
 
     //TODO

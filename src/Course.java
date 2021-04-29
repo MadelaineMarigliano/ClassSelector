@@ -5,7 +5,7 @@ public class Course {
     private String courseCode;
     private String description;
     private String name;
-    private TimeSlot chosenTime;
+    private Option chosenOption;
     private ArrayList<Option> options;
 
     public Course(String courseCode, boolean tutorial, String description, String name, ArrayList<Option> options) {
@@ -20,8 +20,8 @@ public class Course {
 
     }
 
-    public void setChosenTime(TimeSlot time){
-        this.chosenTime = time;
+    public void setChosenOption(Option option){
+        this.chosenOption = option;
     }
 
     public void setDescription(String description) {
@@ -36,7 +36,7 @@ public class Course {
         return courseCode;
     }
 
-    public TimeSlot getChosenTime(){return chosenTime;}
+    public Option getChosenOption(){return chosenOption;}
 
     public String getDescription() {
         return description;
