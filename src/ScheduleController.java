@@ -1,9 +1,14 @@
 import java.util.Scanner;
 
-public class ScheduleController {
+public class ScheduleController extends AbstractController {
     private ScheduleView view;
 
-    private AbstractController run() {
+    public ScheduleController(){
+        super();
+        this.view = new ScheduleView();
+    }
+
+    public AbstractController run() {
         Scanner scanner = new Scanner(System.in);
         view.displayMenu();
         int option;
@@ -38,30 +43,29 @@ public class ScheduleController {
 
     private void createSchedule(Scanner scanner){
         view.preferencesPrompt();
-        String input = scanner.nextLine().trim();
-        while (input != "0"){
-            if (input == "1"){
+        int input = scanner.nextInt();
+        while (input != 0){
+            if (input == 1){
                 view.timePrompt();
                 int time = scanner.nextInt();
-
-
+                courseManager.startPreference(time);
             }
-            if (input == "2") {
+            else if (input == 2) {
                 view.timePrompt();
                 int time = scanner.nextInt();
-
+                courseManager.breakPreference(time);
             }
-            if (input == "3") {
+            else if (input == 3) {
                 view.timePrompt();
                 int time = scanner.nextInt();
-
+                courseManager.endPreference(time);
             }
-            if (input == "4") {
+            else if (input == 4) {
                 view.dayPrompt();
                 String day = scanner.nextLine().trim();
-
-            }
-            input = scanner.nextLine().trim();
+                courseManager.dayPreference(day);
+            }else {view.optionError();}
+            input = scanner.nextInt();
         }
 
     }

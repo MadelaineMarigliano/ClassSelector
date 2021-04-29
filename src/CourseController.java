@@ -2,11 +2,15 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CourseController {
+public class CourseController extends AbstractController{
     private CourseView view;
-    private CourseManager manager;
 
-    private AbstractController run() {
+    public CourseController(){
+        super();
+        this.view = new CourseView();
+    }
+
+    public AbstractController run() {
         Scanner scanner = new Scanner(System.in);
         view.displayMenu();
         int option;
@@ -50,8 +54,8 @@ public class CourseController {
         String courseCode;
         view.courseCodePrompt();
         courseCode = scanner.nextLine().trim();
-        Course c = manager.getCourseByCode(courseCode);
-        manager.removeCourse(c);
+        Course c = courseManager.getCourseByCode(courseCode);
+        courseManager.removeCourse(c);
     }
 
     private void add(Scanner scanner) {
@@ -73,7 +77,7 @@ public class CourseController {
         } else {tutorial = false;}
         ArrayList<Option> options = getOptions(courseCode, scanner);
         Course c = new Course(courseCode, tutorial, description, name, options);
-        manager.addCourse(c);
+        courseManager.addCourse(c);
     }
 
     //NOT DONE
