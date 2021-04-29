@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class ScheduleController extends AbstractController {
@@ -73,6 +74,8 @@ public class ScheduleController extends AbstractController {
         }
     }
 
-    //TODO
-    private void viewSchedule(Scanner scanner){}
+    private void viewSchedule(Scanner scanner){
+        File file = scheduleManager.printToHTML();
+        view.printSchedule(file);
+    }
 }
