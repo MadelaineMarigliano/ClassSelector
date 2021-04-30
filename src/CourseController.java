@@ -1,3 +1,4 @@
+import java.security.InvalidParameterException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,7 +18,10 @@ public class CourseController extends AbstractController{
         option = selectOption(scanner);
         switch(option) {
             case 1: //add course
-                add(scanner);
+                try {
+                    add(scanner);
+                } catch (Exception e){
+                    view.courseNotCreated(); }
             case 2: //delete course
                 delete(scanner);
             case 3: // modify course:
@@ -58,7 +62,7 @@ public class CourseController extends AbstractController{
         courseManager.removeCourse(c);
     }
 
-    private void add(Scanner scanner) {
+    private void add(Scanner scanner) throws Exception {
         //TODO: finish by jasmeen and change to using usecase
         String courseCode;
         String description;
@@ -72,27 +76,27 @@ public class CourseController extends AbstractController{
         name = scanner.nextLine().trim();
         view.tutorialPrompt();
         String s = scanner.nextLine().trim();
-        if (s == "yes") {
+        if (s.equals("yes")) {
             tutorial = true;
         } else {tutorial = false;}
         ArrayList<Option> options = getOptions(courseCode, scanner);
-        Course c = new Course(courseCode, tutorial, description, name, options);
-        courseManager.addCourse(c);
+        //Course c = new Course(courseCode, tutorial, description, name, options);
+        //courseManager.addCourse(c);
     }
 
-    //NOT DONE
-    private ArrayList<Option> getOptions(String code, Scanner scanner){
-        ArrayList options = new ArrayList<Option>();
+
+    private ArrayList<Option> getOptions(String code, Scanner scanner) throws Exception {
+        ArrayList<Option> options = new ArrayList<Option>();
         String answer = new String("Yes");
         String answer2 = new String("Yes");
         String prof;
-        String section
+        String section;
         do {
             view.ProfPrompt();
             prof = scanner.nextLine().trim();
             view.sectionPrompt();
             section = scanner.nextLine().trim();
-            ArrayList timeslots = new ArrayList<TimeSlot>();
+            ArrayList<TimeSlot> timeslots = new ArrayList<TimeSlot>();
             do {
                 Integer start;
                 Integer end;
@@ -103,33 +107,21 @@ public class CourseController extends AbstractController{
                 day = scanner.nextLine().trim();
                 view.locationPrompt();
                 location = scanner.nextLine().trim();
-                start = getTime("start", scanner);
-                end = getTime("end", scanner);
-                duration = getTime("duration", scanner);
+                view.startTime();
+                start = scanner.nextInt();
+                view.endTime();
+                end = scanner.nextInt();
+                view.duration();
+                duration = scanner.nextInt();
                 view.addTimeSlot();
                 answer2 = scanner.nextLine();
-                // use option manager
-                // timeslots.add(new TimeSlot(start, end, day, location, duration));
+                timeslots.add(optionManager.createTimeSlot(start, end, day, location, duration));
             } while (answer2.equals("Yes"));
-            // use option manager
-            /options.add(OptionManager.createOption(code, section, ));
+            options.add(optionManager.createOption(code, section, prof, timeslots));
             view.addOption();
             answer = scanner.nextLine();
         } while (answer.equals("Yes"));
         return options;
-    }
-
-    private Integer getTime(String name, Scanner scanner) {
-        if(name.equals("start")){
-
-        }
-        if (name.equals("end")){
-
-        }
-        if (name.equals("duration")){
-
-        }
-        return null;
     }
 }
 

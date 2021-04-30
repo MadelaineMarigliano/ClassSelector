@@ -8,4 +8,7 @@ public class OptionManager {
         return new Option(courseCode, sectionCode, professor, times);
     }
 
+    public TimeSlot createTimeSlot(Integer start, Integer end, String day, String location, Integer duration){
+        return new TimeSlot(start, end, day, location, duration);
+    }
 }

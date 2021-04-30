@@ -48,4 +48,22 @@ public class CourseView {
 
     public void sectionPrompt() {
     }
+
+    public void startTime() {
+    }
+
+    public void endTime() {
+    }
+
+    public void duration() {
+    }
+
+    public void printException(Exception e) {
+    }
+
+    public void courseAdded() {
+    }
+
+    public void courseNotCreated() {
+    }
 }
