@@ -11,7 +11,7 @@ public class ScheduleManager {
         scheduleArrayList = new ArrayList<>();
     }
 
-    //TODO
+    /*
     public File printToHTML(){
         File file = new File("Schedule.html");
         try {
@@ -21,29 +21,13 @@ public class ScheduleManager {
                     "text-align:center;color: #28324e;\">Event Schedule</span></strong></h1>" +
                     "<table style=\"font-family:Arial, Helvetica, sans-serif;height: 74px; width: 100%; " +
                     "border-collapse: collapse; border-style: solid;\" border=\"1\"> <tbody>");
+
+            ScheduleHTML.write("<tr><td><b>Monday</b></td><td><b>Tuesday</b></td><td><b>Wednesday</b></td><td><b>" +
+                    "Thursday</b></td><td><b>Friday</b></td>");
+
             for (String day : chosenSchedule.getSchedule().keySet()) {
                 ScheduleHTML.write("<tr><td style=\"background-color:#475577;color:white;\"><b>" + day +
                         "</b></td>");
-                /*
-                ArrayList<Event> eventList = schedule.get(t);
-                eventList.sort(new Comparator<Event>() {
-                    @Override
-                    public int compare(Event o1, Event o2) {
-                        return o1.getStartTime().getMinute() - o2.getStartTime().getMinute();
-                    }
-                });
-                for (Event event : eventList) {
-                    ScheduleHTML.write("<td>" + event.toString() + "</td>");
-                }
-                if (eventList.size() < l) {
-                    for (int i = eventList.size() ; i < l ; i++) {
-                        ScheduleHTML.write("<td> </td>");
-                    }
-                }
-                ScheduleHTML.write("</tr>");
-            */
-            }
-
 
             ScheduleHTML.write("</tbody></table></html>");
             ScheduleHTML.close();
@@ -52,7 +36,7 @@ public class ScheduleManager {
         }
         return file;
     }
-
+*/
 
     //These courses are the ones with preferences applied already
     //We should probably use recursion here... sbatessss

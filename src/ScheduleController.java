@@ -17,11 +17,15 @@ public class ScheduleController extends AbstractController {
         switch(option) {
             case 1: //Create schedule
                 createSchedule(scanner);
-            case 2: //View schedule
-                viewSchedule(scanner);
+            case 2: //View options
+                viewOptions(scanner);
             case 3: // back
         }
         return null;
+    }
+
+    private void viewOptions(Scanner scanner) {
+
     }
 
     private int selectOption(Scanner scanner) {
@@ -74,8 +78,10 @@ public class ScheduleController extends AbstractController {
         }
     }
 
+    /* Not necessary until after program is finished
     private void viewSchedule(Scanner scanner){
         File file = scheduleManager.printToHTML();
         view.printSchedule(file);
     }
+     */
 }

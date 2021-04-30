@@ -96,6 +96,7 @@ public class CourseController extends AbstractController{
                 Integer duration;
                 String day;
                 String location;
+                String section;
                 view.dayPrompt();
                 day = scanner.nextLine().trim();
                 view.locationPrompt();

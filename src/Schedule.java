@@ -48,4 +48,6 @@ public class Schedule {
 
     public int getCompactnessScore() {return compactnessScore;}
 
+
+
 }

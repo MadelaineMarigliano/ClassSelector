@@ -28,6 +28,11 @@ public class ScheduleView {
     public void timePrompt(){System.out.println("Please enter the desired time in 24 hour format (e.g. 13)");}
     public void dayPrompt(){System.out.println("Please enter the desired day in lowercase (e.g. monday)");}
 
+    public void printOption(String courseCode, ){
+
+    }
+
+    /* Not needed until finished program
     public void printSchedule(File file) {
         Desktop desktop = Desktop.getDesktop();
         if(file.exists()) {
@@ -38,4 +43,6 @@ public class ScheduleView {
             }
         }
     }
+
+     */
 }
