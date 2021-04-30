@@ -25,7 +25,11 @@ public class ScheduleController extends AbstractController {
     }
 
     private void viewOptions(Scanner scanner) {
-
+        view.finalPrompt();
+        Schedule schedule = scheduleManager.chosenSchedule;
+        for (Course c : schedule.getChosenOptions().keySet()){
+            view.printOption(c.getCourseCode(), schedule.getChosenOptions().get(c).getSectionCode());
+        }
     }
 
     private int selectOption(Scanner scanner) {
@@ -53,21 +57,25 @@ public class ScheduleController extends AbstractController {
                 view.timePrompt();
                 int time = scanner.nextInt();
                 courseManager.startPreference(time);
+                view.preferenceSuccess();
             }
             else if (input == 2) {
                 view.timePrompt();
                 int time = scanner.nextInt();
                 courseManager.breakPreference(time);
+                view.preferenceSuccess();
             }
             else if (input == 3) {
                 view.timePrompt();
                 int time = scanner.nextInt();
                 courseManager.endPreference(time);
+                view.preferenceSuccess();
             }
             else if (input == 4) {
                 view.dayPrompt();
                 String day = scanner.nextLine().trim();
                 courseManager.dayPreference(day);
+                view.preferenceSuccess();
             }else {view.optionError();}
             input = scanner.nextInt();
         }
