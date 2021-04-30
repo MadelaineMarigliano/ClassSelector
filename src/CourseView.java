@@ -45,4 +45,7 @@ public class CourseView {
 
     public void ProfPrompt() {
     }
+
+    public void sectionPrompt() {
+    }
 }

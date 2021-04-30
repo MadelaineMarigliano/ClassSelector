@@ -59,7 +59,7 @@ public class CourseController extends AbstractController{
     }
 
     private void add(Scanner scanner) {
-        //TODO: finish by jasmeen
+        //TODO: finish by jasmeen and change to using usecase
         String courseCode;
         String description;
         String name;
@@ -86,9 +86,12 @@ public class CourseController extends AbstractController{
         String answer = new String("Yes");
         String answer2 = new String("Yes");
         String prof;
+        String section
         do {
             view.ProfPrompt();
             prof = scanner.nextLine().trim();
+            view.sectionPrompt();
+            section = scanner.nextLine().trim();
             ArrayList timeslots = new ArrayList<TimeSlot>();
             do {
                 Integer start;
@@ -96,7 +99,6 @@ public class CourseController extends AbstractController{
                 Integer duration;
                 String day;
                 String location;
-                String section;
                 view.dayPrompt();
                 day = scanner.nextLine().trim();
                 view.locationPrompt();
@@ -106,9 +108,11 @@ public class CourseController extends AbstractController{
                 duration = getTime("duration", scanner);
                 view.addTimeSlot();
                 answer2 = scanner.nextLine();
-                timeslots.add(new TimeSlot(start, end, day, location, duration));
+                // use option manager
+                // timeslots.add(new TimeSlot(start, end, day, location, duration));
             } while (answer2.equals("Yes"));
-            options.add( new Option(code, prof, timeslots));
+            // use option manager
+            /options.add(OptionManager.createOption(code, section, ));
             view.addOption();
             answer = scanner.nextLine();
         } while (answer.equals("Yes"));
