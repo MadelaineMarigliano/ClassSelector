@@ -27,9 +27,10 @@ public class ScheduleView {
 
     public void timePrompt(){System.out.println("Please enter the desired time in 24 hour format (e.g. 13)");}
     public void dayPrompt(){System.out.println("Please enter the desired day in lowercase (e.g. monday)");}
+    public void finalPrompt(){System.out.println("The following chosen sections for a compact schedule are:");}
+    public void printOption(String courseCode, String section){System.out.println(courseCode + ": " + section);}
 
-    public void printOption(String courseCode, ){
-
+    public void preferenceSuccess() {System.out.println("Preferences applied successfully");
     }
 
     /* Not needed until finished program
