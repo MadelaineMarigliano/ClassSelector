@@ -15,10 +15,10 @@ public class MainEntryController extends AbstractController{
         view.displayMenu();
         String option = getOption(scanner);
         if (option.equals("1")){
-            return new CourseController(getBundle());
+            new CourseController(getBundle()).run();
         }
         else if (option.equals("2")){
-            return new ScheduleController(getBundle());
+            new ScheduleController(getBundle()).run();
         }
         return null;
     }
