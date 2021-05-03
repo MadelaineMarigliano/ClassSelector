@@ -45,4 +45,5 @@ public class Option {
     public void setTimes(ArrayList<TimeSlot> times) {
         this.times = times;
     }
+
 }

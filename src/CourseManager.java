@@ -59,21 +59,18 @@ public class CourseManager {
     }
 
     public Course getCourseByCode(String courseCode){
+        //TODO: throw exception if course not in, and put try catch everywhere you use
         for (Course c : courses){
             if (c.getCourseCode() == courseCode){
                 return c;
             }
             }
         return null;
-        //raise an exception?
+
     }
 
     public void removeCourse(Course c){
         courses.remove(c);
-    }
-
-    public void addCourse(Course c) {
-        courses.add(c);
     }
 
     public ArrayList<Course> getCourses() {
@@ -82,5 +79,18 @@ public class CourseManager {
 
     public void setCourses(ArrayList<Course> courses) {
         this.courses = courses;
+    }
+
+    public void createCourse(String courseCode, boolean tutorial, String description, String name, ArrayList<Option> options) {
+        courses.add(new Course(courseCode, tutorial, description, name, options));
+    }
+
+    public void removeOption(String courseCode, String optionCode){
+        for(Option o: getCourseByCode(courseCode).getOptions()){
+            if(o.getSectionCode().equals(optionCode)){
+                getCourseByCode(courseCode).removeOption(o);
+            }
+        }
+
     }
 }

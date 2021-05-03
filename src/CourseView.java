@@ -66,4 +66,16 @@ public class CourseView {
 
     public void courseNotCreated() {
     }
+
+    public void modifyCourseChoice() {
+    }
+
+    public void InvalidModifyEntry() {
+    }
+
+    public void enterCourseCode() {
+    }
+
+    public void enterSectionCode() {
+    }
 }
