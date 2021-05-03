@@ -57,6 +57,10 @@ public class Course {
         this.options = options;
     }
 
+    public void addOption(Option o){
+        options.add(o);
+    }
+
     public void removeOption(Option option){
         options.remove(option);
     }

@@ -93,4 +93,8 @@ public class CourseManager {
         }
 
     }
+
+    public void addOption(Option option, String courseCode) {
+        getCourseByCode(courseCode).addOption(option);
+    }
 }
