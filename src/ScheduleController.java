@@ -1,11 +1,10 @@
-import java.io.File;
 import java.util.Scanner;
 
 public class ScheduleController extends AbstractController {
     private ScheduleView view;
 
-    public ScheduleController(){
-        super();
+    public ScheduleController(UseCaseBundle bundle){
+        super(bundle);
         this.view = new ScheduleView();
     }
 
@@ -26,7 +25,7 @@ public class ScheduleController extends AbstractController {
 
     private void viewOptions(Scanner scanner) {
         view.finalPrompt();
-        Schedule schedule = scheduleManager.chosenSchedule;
+        Schedule schedule = getBundle().getScheduleManager().chosenSchedule;
         for (Course c : schedule.getChosenOptions().keySet()){
             view.printOption(c.getCourseCode(), schedule.getChosenOptions().get(c).getSectionCode());
         }
@@ -56,32 +55,32 @@ public class ScheduleController extends AbstractController {
             if (input == 1){
                 view.timePrompt();
                 int time = scanner.nextInt();
-                courseManager.startPreference(time);
+                getBundle().getCourseManager().startPreference(time);
                 view.preferenceSuccess();
             }
             else if (input == 2) {
                 view.timePrompt();
                 int time = scanner.nextInt();
-                courseManager.breakPreference(time);
+                getBundle().getCourseManager().breakPreference(time);
                 view.preferenceSuccess();
             }
             else if (input == 3) {
                 view.timePrompt();
                 int time = scanner.nextInt();
-                courseManager.endPreference(time);
+                getBundle().getCourseManager().endPreference(time);
                 view.preferenceSuccess();
             }
             else if (input == 4) {
                 view.dayPrompt();
                 String day = scanner.nextLine().trim();
-                courseManager.dayPreference(day);
+                getBundle().getCourseManager().dayPreference(day);
                 view.preferenceSuccess();
             }else {view.optionError();}
             input = scanner.nextInt();
         }
 
-        Schedule s = scheduleManager.bestSchedule(courseManager.getCourses());
-        for (Course c : courseManager.getCourses()){
+        Schedule s = getBundle().getScheduleManager().bestSchedule(getBundle().getCourseManager().getCourses());
+        for (Course c : getBundle().getCourseManager().getCourses()){
             c.setChosenOption(s.getChosenOptions().get(c));
         }
     }

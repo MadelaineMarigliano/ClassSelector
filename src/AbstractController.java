@@ -1,10 +1,12 @@
 public abstract class AbstractController {
-    public CourseManager courseManager;
-    public ScheduleManager scheduleManager;
-    public OptionManager optionManager;
+    private UseCaseBundle bundle;
 
-    public AbstractController () {courseManager = new CourseManager(); scheduleManager = new ScheduleManager(); optionManager = new OptionManager();
-    }
+
+    public AbstractController(UseCaseBundle bundle) {this.bundle = bundle;}
 
     public abstract  AbstractController run();
+
+    public UseCaseBundle getBundle() {
+        return bundle;
+    }
 }

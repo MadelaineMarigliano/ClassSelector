@@ -1,13 +1,11 @@
-import java.security.InvalidParameterException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CourseController extends AbstractController{
     private CourseView view;
 
-    public CourseController(){
-        super();
+    public CourseController(UseCaseBundle bundle){
+        super(bundle);
         this.view = new CourseView();
     }
 
@@ -58,8 +56,8 @@ public class CourseController extends AbstractController{
         String courseCode;
         view.courseCodePrompt();
         courseCode = scanner.nextLine().trim();
-        Course c = courseManager.getCourseByCode(courseCode);
-        courseManager.removeCourse(c);
+        Course c = getBundle().getCourseManager().getCourseByCode(courseCode);
+        getBundle().getCourseManager().removeCourse(c);
     }
 
     private void add(Scanner scanner) throws Exception {
@@ -86,7 +84,7 @@ public class CourseController extends AbstractController{
 
 
     private ArrayList<Option> getOptions(String code, Scanner scanner) throws Exception {
-        ArrayList<Option> options = new ArrayList<Option>();
+        ArrayList<Option> options = new ArrayList<>();
         String answer = new String("Yes");
         String answer2 = new String("Yes");
         String prof;
@@ -96,7 +94,7 @@ public class CourseController extends AbstractController{
             prof = scanner.nextLine().trim();
             view.sectionPrompt();
             section = scanner.nextLine().trim();
-            ArrayList<TimeSlot> timeslots = new ArrayList<TimeSlot>();
+            ArrayList<TimeSlot> timeslots = new ArrayList<>();
             do {
                 Integer start;
                 Integer end;
@@ -115,9 +113,9 @@ public class CourseController extends AbstractController{
                 duration = scanner.nextInt();
                 view.addTimeSlot();
                 answer2 = scanner.nextLine();
-                timeslots.add(optionManager.createTimeSlot(start, end, day, location, duration));
+                timeslots.add(getBundle().getOptionManager().createTimeSlot(start, end, day, location, duration));
             } while (answer2.equals("Yes"));
-            options.add(optionManager.createOption(code, section, prof, timeslots));
+            options.add(getBundle().getOptionManager().createOption(code, section, prof, timeslots));
             view.addOption();
             answer = scanner.nextLine();
         } while (answer.equals("Yes"));
