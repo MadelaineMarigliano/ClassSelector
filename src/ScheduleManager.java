@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.*;
 
+import static javafx.scene.input.KeyCode.Y;
+
 public class ScheduleManager {
     ArrayList<Schedule> scheduleArrayList;
     Schedule chosenSchedule;
@@ -39,17 +41,51 @@ public class ScheduleManager {
 */
 
     //These courses are the ones with preferences applied already
-    //We should probably use recursion here... sbatessss
-    //TODO
-    private ArrayList<Schedule> createSchedules(ArrayList<Course> courses){
-        return null;
+    private void createSchedules(HashMap<Course, ArrayList<Option>> map, HashMap<Course, Option>
+            schedule, ArrayList<HashMap<Course, Option>> schedules){
+        if (!map.isEmpty()){
+             Map.Entry<Course, ArrayList<Option>> e = map.entrySet().iterator().next();
+             Course c = e.getKey();
+             ArrayList<Option> a = e.getValue();
+             map.remove(c, a);
+            for (Option o : a){
+                schedule.put(c,o);
+                createSchedules(map, schedule, schedules);
+                schedule.remove(c, o);
+            }
+        } else {schedules.add(schedule);}
     }
 
     public Schedule bestSchedule(ArrayList<Course> courses) {
-        ArrayList<Schedule> schedules = createSchedules(courses);
+        HashMap<Course, ArrayList<Option>> map = new HashMap<>();
+        for (Course course : courses) {
+            map.put(course, course.getOptions());
+        }
+        ArrayList<HashMap<Course, Option>> schedulesValues = new ArrayList<>();
+        createSchedules(map, new HashMap<>(), schedulesValues);
+        ArrayList<Schedule> schedules = new ArrayList<>();
+
+        for (HashMap<Course, Option> chosenOptions : schedulesValues) {schedules.add(new Schedule(chosenOptions));}
+
         schedules.sort(Comparator.comparing(Schedule::getCompactnessScore));
         this.chosenSchedule = schedules.get(0);
         return schedules.get(0);
+    }
+
+    private boolean scheduleOverlap(Schedule schedule){
+        ArrayList<TimeSlot> times = new ArrayList<>();
+        for (ArrayList arr : schedule.getSchedule().values()){
+            times.addAll(arr);
+        }
+
+        for (int i = 0; i < times.size(); i++) {
+            for (int k = i + 1; k < times.size(); k++) {
+                if (times.get(i).timeOverlap(times.get(i+1))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 

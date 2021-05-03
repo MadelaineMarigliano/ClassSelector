@@ -54,4 +54,13 @@ public class TimeSlot {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    //Should this go in manager?
+    public boolean timeOverlap(TimeSlot time){
+        if (this.day == time.getDay() && ((this.start > time.getStart() && this.start < time.getEnd()) |
+                (time.getStart() > this.start && time.getStart() < this.end))){
+            return true;
+        }
+        else {return false;}
+    }
 }
