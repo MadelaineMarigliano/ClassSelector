@@ -29,7 +29,7 @@ public class MainEntryController extends AbstractController{
         boolean isValid = validInput(input);
         while(!isValid){
             view.displayInputError();
-            input = scanner.nextLine();
+            input = scanner.nextLine().trim();
             isValid = validInput(input);
         }
         return input;

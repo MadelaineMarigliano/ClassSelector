@@ -50,7 +50,7 @@ public class CourseManager {
         for (Course c : courses) {
             for (Option option : c.getOptions()) {
                 for (TimeSlot timeSlot : option.getTimes()) {
-                    if (timeSlot.getDay() == day) {
+                    if (timeSlot.getDay().equals(day)) {
                         c.removeOption(option);
                     }
                 }
@@ -58,15 +58,14 @@ public class CourseManager {
         }
     }
 
-    public Course getCourseByCode(String courseCode){
+    public Course getCourseByCode(String courseCode) throws Exception{
         //TODO: throw exception if course not in, and put try catch everywhere you use
-        for (Course c : courses){
-            if (c.getCourseCode() == courseCode){
+        for (Course c : courses) {
+            if (c.getCourseCode().equals(courseCode)) {
                 return c;
             }
-            }
-        return null;
-
+        }
+        throw new Exception("This course does not exist");
     }
 
     public void removeCourse(Course c){
@@ -85,16 +84,24 @@ public class CourseManager {
         courses.add(new Course(courseCode, tutorial, description, name, options));
     }
 
-    public void removeOption(String courseCode, String optionCode){
-        for(Option o: getCourseByCode(courseCode).getOptions()){
-            if(o.getSectionCode().equals(optionCode)){
-                getCourseByCode(courseCode).removeOption(o);
+    public void removeOption(String courseCode, String optionCode) throws Exception {
+        try {
+            for (Option o : getCourseByCode(courseCode).getOptions()) {
+                if (o.getSectionCode().equals(optionCode)) {
+                    getCourseByCode(courseCode).removeOption(o);
+                }
             }
+        } catch (Exception e){
+            throw new Exception("This course does not exist");
         }
 
     }
 
-    public void addOption(Option option, String courseCode) {
-        getCourseByCode(courseCode).addOption(option);
+    public void addOption(Option option, String courseCode) throws Exception {
+        try {
+            getCourseByCode(courseCode).addOption(option);
+        } catch (Exception e){
+            throw new Exception("This course does not exist");
+        }
     }
 }

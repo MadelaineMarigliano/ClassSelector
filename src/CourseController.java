@@ -20,14 +20,18 @@ public class CourseController extends AbstractController {
                     add(scanner);
                     view.courseAdded();
                 } catch (Exception e) {
+                    view.printException(e);
                     view.courseNotCreated();
                 }
+                return new CourseController(getBundle()).run();
             case 2: //delete course
                 delete(scanner);
+                return new CourseController(getBundle()).run();
             case 3: // modify:
                 modify(scanner);
+                return new CourseController(getBundle()).run();
             case 4: // back
-                return new MainEntryController(getBundle());
+                return new MainEntryController(getBundle()).run();
         }
         return null;
     }
@@ -51,9 +55,8 @@ public class CourseController extends AbstractController {
         } while (true);
     }
 
-    //NOT DONE
+
     private void modify(Scanner scanner) {
-        // TODO: if course code doesnt ecist, or section
         view.modifyCourseChoice();
         String choice;
         choice = scanner.nextLine().trim();
@@ -88,12 +91,17 @@ public class CourseController extends AbstractController {
         String courseCode;
         view.courseCodePrompt();
         courseCode = scanner.nextLine().trim();
-        Course c = getBundle().getCourseManager().getCourseByCode(courseCode);
-        getBundle().getCourseManager().removeCourse(c);
+        try {
+            Course c = getBundle().getCourseManager().getCourseByCode(courseCode);
+            getBundle().getCourseManager().removeCourse(c);
+        } catch (Exception e){
+            view.printException(e);
+        }
     }
 
     private void add(Scanner scanner) throws Exception {
-        //TODO: finish by jasmeen and change to using usecase
+        //TODO: 1. While loop doesnt work correctly, not all possible errors are caught
+        // loop is weird, course doesnt get created, error is thrown
         String courseCode;
         String description;
         String name;
@@ -115,15 +123,19 @@ public class CourseController extends AbstractController {
     private ArrayList<Option> getOptions(String code, Scanner scanner) throws Exception {
         ArrayList<Option> options = new ArrayList<>();
         String answer = new String("Yes");
-        do {
-            options.add(createOption(code, scanner));
-            view.addOption();
-            answer = scanner.nextLine();
-        } while (answer.equals("Yes"));
-        return options;
+        try {
+            do {
+                options.add(createOption(code, scanner));
+                view.addOption();
+                answer = scanner.nextLine();
+            } while (answer.equals("Yes"));
+            return options;
+        } catch (Exception e){
+            throw new Exception("gp");
+        }
     }
 
-    private Option createOption(String code, Scanner scanner) {
+    private Option createOption(String code, Scanner scanner) throws Exception {
         String answer;
         String prof;
         String section;
@@ -132,28 +144,32 @@ public class CourseController extends AbstractController {
         view.sectionPrompt();
         section = scanner.nextLine().trim();
         ArrayList<TimeSlot> timeslots = new ArrayList<>();
-        do {
-            int start;
-            int end;
-            int duration;
-            String day;
-            String location;
-            view.dayPrompt();
-            day = scanner.nextLine().trim();
-            view.locationPrompt();
-            location = scanner.nextLine().trim();
-            view.startTime();
-            start = scanner.nextInt();
-            view.endTime();
-            end = scanner.nextInt();
-            view.duration();
-            duration = scanner.nextInt();
-            view.addTimeSlot();
-            answer = scanner.nextLine();
-            timeslots.add(getBundle().getOptionManager().createTimeSlot(start, end, day, location, duration));
+        try {
+            do {
+                int start;
+                int end;
+                int duration;
+                String day;
+                String location;
+                view.dayPrompt();
+                day = scanner.nextLine().trim();
+                view.locationPrompt();
+                location = scanner.nextLine().trim();
+                view.startTime();
+                start = scanner.nextInt();
+                view.endTime();
+                end = scanner.nextInt();
+                view.duration();
+                duration = scanner.nextInt();
+                view.addTimeSlot();
+                answer = scanner.nextLine();
+                timeslots.add(getBundle().getOptionManager().createTimeSlot(start, end, day, location, duration));
 
-        } while (answer.equals("Yes"));
-        return getBundle().getOptionManager().createOption(code, section, prof, timeslots);
+            } while (answer.equals("Yes"));
+            return getBundle().getOptionManager().createOption(code, section, prof, timeslots);
+        } catch (Exception e){
+            throw new Exception("cp");
+        }
     }
 }
 

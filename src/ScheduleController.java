@@ -19,6 +19,7 @@ public class ScheduleController extends AbstractController {
             case 2: //View options
                 viewOptions(scanner);
             case 3: // back
+                return new MainEntryController(getBundle()).run();
         }
         return null;
     }
