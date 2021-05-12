@@ -56,7 +56,8 @@ public class ScheduleManager {
         } else {schedules.add(schedule);}
     }
 
-    public Schedule bestSchedule(ArrayList<Course> courses) {
+    public Schedule bestSchedule(ArrayList<Course> courses) throws Exception {
+        if (courses.isEmpty()){throw new Exception("There are no courses");}
         HashMap<Course, ArrayList<Option>> map = new HashMap<>();
         for (Course course : courses) {
             map.put(course, course.getOptions());

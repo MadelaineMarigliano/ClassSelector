@@ -4,7 +4,7 @@ public class CourseManager {
     //courses with no set day or time
     private ArrayList<Course> courses;
 
-    public CourseManager(){}
+    public CourseManager(){courses = new ArrayList<>();}
 
     //Removes times at a certain time
     public void breakPreference(Integer time){
@@ -71,6 +71,8 @@ public class CourseManager {
     public void removeCourse(Course c){
         courses.remove(c);
     }
+
+    public void addCourse(Course c) {courses.add(c);}
 
     public ArrayList<Course> getCourses() {
         return courses;

@@ -33,6 +33,10 @@ public class ScheduleView {
     public void preferenceSuccess() {System.out.println("Preferences applied successfully");
     }
 
+    public void printException(Exception e) {
+        System.out.println(e.getMessage());
+    }
+
     /* Not needed until finished program
     public void printSchedule(File file) {
         Desktop desktop = Desktop.getDesktop();

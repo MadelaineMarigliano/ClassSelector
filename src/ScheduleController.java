@@ -50,6 +50,7 @@ public class ScheduleController extends AbstractController {
     }
 
     private void createSchedule(Scanner scanner){
+        try {
         view.preferencesPrompt();
         int input = scanner.nextInt();
         while (input != 0){
@@ -79,11 +80,11 @@ public class ScheduleController extends AbstractController {
             }else {view.optionError();}
             input = scanner.nextInt();
         }
-
-        Schedule s = getBundle().getScheduleManager().bestSchedule(getBundle().getCourseManager().getCourses());
-        for (Course c : getBundle().getCourseManager().getCourses()){
-            c.setChosenOption(s.getChosenOptions().get(c));
-        }
+            Schedule s = getBundle().getScheduleManager().bestSchedule(getBundle().getCourseManager().getCourses());
+            for (Course c : getBundle().getCourseManager().getCourses()){
+                c.setChosenOption(s.getChosenOptions().get(c));
+            }
+        } catch (Exception e) {view.printException(e);}
     }
 
     /* Not necessary until after program is finished
