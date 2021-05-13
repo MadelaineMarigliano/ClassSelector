@@ -89,4 +89,11 @@ public class CourseView {
         System.out.println("Your entry was invalid");
     }
 
+    public void timeSlot1() {
+        System.out.println("Please enter information for Time Slot 1, note that you can create at most 3 Time Slots");
+    }
+
+    public void timeSlot(String toString) {
+        System.out.println("Please enter information for Time Slot " + toString + ". If you would not like to create another time slot, please enter 'Done'");
+    }
 }
