@@ -1,4 +1,5 @@
 import javax.crypto.spec.PSource;
+import java.util.ArrayList;
 
 public class CourseView {
 
@@ -66,7 +67,7 @@ public class CourseView {
     }
 
     public void duration() {
-        System.out.println("Enter the duration of this lecture");
+        System.out.println("Enter the integer representing the duration of this lecture in minutes");
     }
 
     public void printException(Exception e) {

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ScheduleController extends AbstractController {
@@ -80,7 +81,7 @@ public class ScheduleController extends AbstractController {
             }else {view.optionError();}
             input = scanner.nextInt();
         }
-            Schedule s = getBundle().getScheduleManager().bestSchedule(getBundle().getCourseManager().getCourses());
+            Schedule s = getBundle().getScheduleManager().bestSchedule((ArrayList<Course>) getBundle().getCourseManager().getCourses());
             for (Course c : getBundle().getCourseManager().getCourses()){
                 c.setChosenOption(s.getChosenOptions().get(c));
             }

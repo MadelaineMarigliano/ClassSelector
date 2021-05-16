@@ -57,14 +57,16 @@ public class CourseController extends AbstractController {
 
 
     private void modify(Scanner scanner) {
+        //TODO: always says course does not exist, do not let it delete section if it the only one remaining
         view.modifyCourseChoice();
         String choice;
         choice = scanner.nextLine().trim();
         String courseCode;
-        view.courseCodePrompt();
-        courseCode = scanner.nextLine().trim();
         if (choice.equals("Add")) {
             try {
+                view.courseCodePrompt();
+                courseCode = scanner.nextLine().trim();
+                Course c = getBundle().getCourseManager().getCourseByCode(courseCode);
                 getBundle().getCourseManager().addOption(createOption(courseCode, scanner), courseCode);
             } catch (Exception e) {
                 view.printException(e);
@@ -72,17 +74,18 @@ public class CourseController extends AbstractController {
         }
 
         if (choice.equals("Delete")) {
-            String sectionCode;
-            view.sectionPrompt();
-            sectionCode = scanner.nextLine();
             try {
+                view.courseCodePrompt();
+                courseCode = scanner.nextLine().trim();
+                Course c = getBundle().getCourseManager().getCourseByCode(courseCode);
+                String sectionCode;
+                view.sectionPrompt();
+                sectionCode = scanner.nextLine();
                 getBundle().getCourseManager().removeOption(courseCode, sectionCode);
             } catch (Exception e) {
                 view.printException(e);
             }
 
-        } else {
-            view.InvalidModifyEntry();
         }
     }
 
@@ -93,15 +96,13 @@ public class CourseController extends AbstractController {
         courseCode = scanner.nextLine().trim();
         try {
             Course c = getBundle().getCourseManager().getCourseByCode(courseCode);
-            getBundle().getCourseManager().removeCourse(c);
+            getBundle().getCourseManager().removeCourse(c.getCourseCode());
         } catch (Exception e) {
             view.printException(e);
         }
     }
 
     private void add(Scanner scanner) throws Exception {
-        //TODO: 1. While loop doesnt work correctly, option prompt and timeslot prompt shows up same time
-
         String courseCode;
         String description;
         String name;
@@ -153,7 +154,7 @@ public class CourseController extends AbstractController {
                 // create time slot 2 and 3, give option to opt out
                 if (i == 1) {
                     view.timeSlot1();
-                    timeslots.add(createTimeSlot(scanner, code));
+                    timeslots.add(createTimeSlot(scanner));
                 }
                 if (i > 1) {
                     scanner.nextLine();
@@ -163,16 +164,16 @@ public class CourseController extends AbstractController {
                     if (ans.equals("Done")) {
                         return getBundle().getOptionManager().createOption(code, section, prof, timeslots);
                     }
-                    timeslots.add(createTimeSlot(scanner, code));
+                    timeslots.add(createTimeSlot(scanner));
                 }
             }
             return getBundle().getOptionManager().createOption(code, section, prof, timeslots);
         } catch (Exception e){
-            throw new Exception("cp");
+            throw new Exception("co");
         }
     }
 
-    private TimeSlot createTimeSlot(Scanner scanner, String code) throws Exception {
+    private TimeSlot createTimeSlot(Scanner scanner) throws Exception {
         try {
             int start;
             int end;
