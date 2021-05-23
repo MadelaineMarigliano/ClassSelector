@@ -1,13 +1,16 @@
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Course {
     private String courseCode;
     private String description;
     private String name;
     private Option chosenOption;
-    private ArrayList<Option> options;
+    private HashMap<String, Option> options;
 
-    public Course(String courseCode, boolean tutorial, String description, String name, ArrayList<Option> options) {
+    public Course(String courseCode, boolean tutorial, String description, String name, HashMap<String, Option> options) {
+        // TODO: problem occurs here
         if (tutorial) {
             this.courseCode = courseCode + "TUT";
         } else {
@@ -19,7 +22,7 @@ public class Course {
 
     }
 
-    public void setChosenOption(Option option){
+    public void setChosenOption(Option option) {
         this.chosenOption = option;
     }
 
@@ -35,7 +38,9 @@ public class Course {
         return courseCode;
     }
 
-    public Option getChosenOption(){return chosenOption;}
+    public Option getChosenOption() {
+        return chosenOption;
+    }
 
     public String getDescription() {
         return description;
@@ -50,18 +55,22 @@ public class Course {
     }
 
     public ArrayList<Option> getOptions() {
-        return options;
+        return (ArrayList<Option>) options.values();
     }
 
-    public void setOptions(ArrayList<Option> options) {
+    public void setOptions(HashMap<String, Option> options) {
         this.options = options;
     }
 
-    public void addOption(Option o){
-        options.add(o);
+    public void addOption(Option o) {
+        options.put(o.getSectionCode(), o);
     }
 
-    public void removeOption(Option option){
-        options.remove(option);
+    public void removeOption(Option option) {
+        options.remove(option.getSectionCode());
+    }
+
+    public HashMap<String, Option> getOptionsHashMap() {
+        return options;
     }
 }

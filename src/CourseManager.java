@@ -73,6 +73,10 @@ public class CourseManager {
 
     }
 
+    public boolean courseExists(String code) {
+        return courses.containsKey(code);
+    }
+
 
     public void removeCourse(String c) {
         courses.remove(c);
@@ -84,18 +88,19 @@ public class CourseManager {
     }
 
     public void createCourse(String courseCode, boolean tutorial, String description, String
-            name, ArrayList<Option> options) {
+            name, HashMap<String, Option> options) {
         courses.put(courseCode, new Course(courseCode, tutorial, description, name, options));
     }
 
     public void removeOption(String courseCode, String optionCode) throws Exception {
-        //TODO: fix this shiz
         try {
-            for (Option o : getCourseByCode(courseCode).getOptions()) {
-                if (o.getSectionCode().equals(optionCode)) {
-                    getCourseByCode(courseCode).removeOption(o);
-                }
+            if (getCourseByCode(courseCode).getOptionsHashMap().containsKey(optionCode)) {
+                getCourseByCode(courseCode).getOptionsHashMap().remove(optionCode);
+            } else {
+                throw new Exception("This option does not exist");
             }
+
+
         } catch (Exception e) {
             throw new Exception(e.toString());
         }
@@ -107,6 +112,15 @@ public class CourseManager {
             getCourseByCode(courseCode).addOption(option);
         } catch (Exception e) {
             throw new Exception("This course does not exist");
+        }
+    }
+
+    public boolean onlyOption(String courseCode) throws Exception {
+        try{
+            Integer i = 1;
+            return i.equals(getCourseByCode(courseCode).getOptionsHashMap().size());
+        } catch (Exception e){
+            throw new Exception(e.toString());
         }
     }
 }

@@ -86,15 +86,24 @@ public class CourseView {
         System.out.println("Please enter 'Add' if you would like to add a lecture section for a course or 'Delete' if you would like to delete a lecture section for a course");
     }
 
-    public void InvalidModifyEntry() {
-        System.out.println("Your entry was invalid");
-    }
 
     public void timeSlot1() {
-        System.out.println("Please enter information for Time Slot 1, note that you can create at most 3 Time Slots");
+        System.out.println("Please enter information for this Time Slot ");
     }
 
-    public void timeSlot(String toString) {
-        System.out.println("Please enter information for Time Slot " + toString + ". If you would not like to create another time slot, please enter 'Done'");
+    public void codeExists() {
+        System.out.println("A course with this course code already exists.");
+    }
+
+    public void deleted() {
+        System.out.println("This course has been deleted");
+    }
+
+    public void doesNotExist(){
+        System.out.println("This course does not exist");
+    }
+
+    public void onlyOption() {
+        System.out.println("There is one only remaining option for this course so it cannot be deleted.");
     }
 }

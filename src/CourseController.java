@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class CourseController extends AbstractController {
@@ -77,11 +78,18 @@ public class CourseController extends AbstractController {
             try {
                 view.courseCodePrompt();
                 courseCode = scanner.nextLine().trim();
-                Course c = getBundle().getCourseManager().getCourseByCode(courseCode);
-                String sectionCode;
-                view.sectionPrompt();
-                sectionCode = scanner.nextLine();
-                getBundle().getCourseManager().removeOption(courseCode, sectionCode);
+                if(getBundle().getCourseManager().courseExists(courseCode)){
+                    String sectionCode;
+                    view.sectionPrompt();
+                    sectionCode = scanner.nextLine();
+                    if(getBundle().getCourseManager().onlyOption(courseCode)){
+                        view.onlyOption();
+                    } else {
+                        getBundle().getCourseManager().removeOption(courseCode, sectionCode);
+                    }
+                } else {
+                    view.doesNotExist();
+                }
             } catch (Exception e) {
                 view.printException(e);
             }
@@ -95,8 +103,12 @@ public class CourseController extends AbstractController {
         view.courseCodePrompt();
         courseCode = scanner.nextLine().trim();
         try {
-            Course c = getBundle().getCourseManager().getCourseByCode(courseCode);
-            getBundle().getCourseManager().removeCourse(c.getCourseCode());
+            if (getBundle().getCourseManager().courseExists(courseCode)){
+                getBundle().getCourseManager().removeCourse(courseCode);
+                view.deleted();
+            } else {
+                view.doesNotExist();
+            }
         } catch (Exception e) {
             view.printException(e);
         }
@@ -109,6 +121,11 @@ public class CourseController extends AbstractController {
         boolean tutorial;
         view.courseCodePrompt();
         courseCode = scanner.nextLine().trim();
+        while (getBundle().getCourseManager().courseExists(courseCode)){
+            view.codeExists();
+            view.courseCodePrompt();
+            courseCode = scanner.nextLine();
+        }
         view.descriptionPrompt();
         description = scanner.nextLine().trim();
         view.namePrompt();
@@ -116,18 +133,19 @@ public class CourseController extends AbstractController {
         view.tutorialPrompt();
         String s = scanner.nextLine().trim();
         tutorial = s.equals("yes");
-        ArrayList<Option> options = getOptions(courseCode, scanner);
+        HashMap<String, Option> options = getOptions(courseCode, scanner);
         getBundle().getCourseManager().createCourse(courseCode, tutorial, description, name, options);
     }
 
 
-    private ArrayList<Option> getOptions(String code, Scanner scanner) throws Exception {
-        ArrayList<Option> options = new ArrayList<>();
+    private HashMap<String, Option> getOptions(String code, Scanner scanner) throws Exception {
+        HashMap<String, Option> options = new HashMap<>();
         boolean answer = true;
         String resp;
         try {
             do {
-                options.add(createOption(code, scanner));
+                Option o = createOption(code, scanner);
+                options.put(o.getSectionCode(), o);
                 view.addOption();
                 resp = scanner.nextLine();
                 if (!resp.equals("Yes")) {
@@ -140,6 +158,7 @@ public class CourseController extends AbstractController {
         }
     }
 
+
     private Option createOption(String code, Scanner scanner) throws Exception {
         try {
             ArrayList<TimeSlot> timeslots = new ArrayList<>();
@@ -149,26 +168,18 @@ public class CourseController extends AbstractController {
             prof = scanner.nextLine().trim();
             view.sectionPrompt();
             section = scanner.nextLine().trim();
-            for (Integer i = 1; i <= 3; i++) {
-                // create time slot "1"
-                // create time slot 2 and 3, give option to opt out
-                if (i == 1) {
-                    view.timeSlot1();
-                    timeslots.add(createTimeSlot(scanner));
-                }
-                if (i > 1) {
-                    scanner.nextLine();
-                    String ans;
-                    view.timeSlot(i.toString());
-                    ans = scanner.nextLine().trim();
-                    if (ans.equals("Done")) {
-                        return getBundle().getOptionManager().createOption(code, section, prof, timeslots);
-                    }
-                    timeslots.add(createTimeSlot(scanner));
-                }
-            }
+            boolean resp;
+            do {
+                String ans;
+                view.timeSlot1();
+                timeslots.add(createTimeSlot(scanner));
+                scanner.nextLine();
+                view.addTimeSlot();
+                ans = scanner.nextLine();
+                resp = ans.equals("Yes");
+            } while (resp);
             return getBundle().getOptionManager().createOption(code, section, prof, timeslots);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("co");
         }
     }
@@ -191,7 +202,7 @@ public class CourseController extends AbstractController {
             view.duration();
             duration = scanner.nextInt();
             return getBundle().getOptionManager().createTimeSlot(start, end, day, location, duration);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("cts");
         }
     }
