@@ -1,2 +1,3 @@
 This is a work in progress project that creates a schedule of classes given a set of possible lecture sections for each class. 
+
 It filters out lecture sections by user preferences (such as no classes after 6pm) and displays the most compact schedule. 
